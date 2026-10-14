@@ -10,6 +10,7 @@
   const $ = (selector) => document.querySelector(selector);
 
   function showStep(name) {
+    if (name !== "invite") resetNoButton();
     steps.forEach((step) => {
       const section = $(`#${step}-step`);
       const active = step === name;
@@ -220,24 +221,82 @@
     }
   }
 
-  // A small playful dodge for pointer users; keyboard users can still reach both buttons.
+  // Keep the playful button visible while moving it around the whole viewport.
   const noButton = $("#no-button");
-  const noMessages = ["Are you suuure? 👀", "This button is feeling shy 🙈", "Maybe try the pink one? 💗"];
+  const yesButton = $("#yes-button");
+  const noMessages = ["Are you suuure? 👀", "This button is feeling shy 🙈", "Maybe try the pink one? 💗", "No pressure. The invitation is here whenever you want it ♡"];
   let dodges = 0;
-  function dodge(compact = false) {
+  let lastDodge = -Infinity;
+
+  function resetNoButton() {
+    noButton.classList.remove("is-floating");
+    noButton.style.left = "";
+    noButton.style.top = "";
+    noButton.style.transform = "";
+  }
+
+  function moveNoButton() {
+    const now = performance.now();
+    if (now - lastDodge < 220) return;
+    lastDodge = now;
     dodges += 1;
-    const scale = compact ? 0.35 : 1;
-    const x = [-42, 50, -20, 38][dodges % 4] * scale;
-    const y = [-18, 16, 22, -20][dodges % 4] * scale;
-    noButton.style.transform = `translate(${x}px, ${y}px) rotate(${dodges % 2 ? -5 : 5}deg)`;
+    const wasFloating = noButton.classList.contains("is-floating");
+    const origin = noButton.getBoundingClientRect();
+    if (!wasFloating) {
+      noButton.classList.add("is-floating");
+      noButton.style.left = `${origin.left}px`;
+      noButton.style.top = `${origin.top}px`;
+      noButton.getBoundingClientRect();
+    }
+
+    const viewport = window.visualViewport;
+    const left = viewport?.offsetLeft || 0;
+    const top = viewport?.offsetTop || 0;
+    const width = viewport?.width || window.innerWidth;
+    const height = viewport?.height || window.innerHeight;
+    const padding = 18;
+    const buttonWidth = noButton.offsetWidth;
+    const buttonHeight = noButton.offsetHeight;
+    const yes = yesButton.getBoundingClientRect();
+    const availableX = Math.max(0, width - buttonWidth - padding * 2);
+    const availableY = Math.max(0, height - buttonHeight - padding * 2);
+    let destination;
+    for (let attempt = 0; attempt < 30; attempt += 1) {
+      const x = left + padding + Math.random() * availableX;
+      const y = top + padding + Math.random() * availableY;
+      const nearYes = x < yes.right + 12 && x + buttonWidth > yes.left - 12 && y < yes.bottom + 12 && y + buttonHeight > yes.top - 12;
+      const tooClose = Math.hypot(x - origin.left, y - origin.top) < Math.min(width, height) * 0.28;
+      if (!nearYes && !tooClose) {
+        destination = { x, y };
+        break;
+      }
+    }
+    destination ||= { x: left + padding, y: top + padding };
+    const place = () => {
+      noButton.style.left = `${destination.x}px`;
+      noButton.style.top = `${destination.y}px`;
+      noButton.style.transform = `rotate(${dodges % 2 ? -6 : 6}deg)`;
+    };
+    if (wasFloating) place(); else requestAnimationFrame(place);
     $("#no-message").textContent = noMessages[(dodges - 1) % noMessages.length];
   }
   noButton.addEventListener("pointerenter", (event) => {
-    if (event.pointerType === "mouse") dodge();
+    if (event.pointerType === "mouse") moveNoButton();
   });
-  noButton.addEventListener("click", () => {
-    dodge(window.matchMedia("(max-width: 620px)").matches);
-    $("#no-message").textContent = "No pressure. The invitation is here whenever you want it ♡";
+  noButton.addEventListener("pointerdown", (event) => {
+    if (event.pointerType !== "mouse") {
+      event.preventDefault();
+      moveNoButton();
+    }
+  });
+  noButton.addEventListener("click", (event) => { event.preventDefault(); moveNoButton(); });
+  window.addEventListener("resize", () => {
+    if (!noButton.classList.contains("is-floating")) return;
+    const padding = 18;
+    const maxLeft = Math.max(padding, window.innerWidth - noButton.offsetWidth - padding);
+    const maxTop = Math.max(padding, window.innerHeight - noButton.offsetHeight - padding);
+    noButton.style.left = `${Math.min(Math.max(padding, parseFloat(noButton.style.left)), maxLeft)}px`;
+    noButton.style.top = `${Math.min(Math.max(padding, parseFloat(noButton.style.top)), maxTop)}px`;
   });
   $(".brand").addEventListener("click", () => showStep("invite"));
   $("#yes-button").addEventListener("click", () => showStep("date"));
