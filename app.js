@@ -212,12 +212,6 @@
     if (state.sending) return;
     const error = $("#submit-error");
     error.textContent = "";
-    const name = $("#guest-name").value.trim();
-    if (!name) {
-      error.textContent = "Please add your name first ♡";
-      $("#guest-name").focus();
-      return;
-    }
     if (!config.bookingEndpoint) {
       error.textContent = "The invitation is almost ready. Booking will open soon ♡";
       return;
@@ -232,8 +226,7 @@
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
-          _subject: `E-date choice from ${name}`,
-          name,
+          _subject: "E-date choice from Nam Tan",
           note: $("#guest-note").value.trim(),
           thailand_time: bangkokTime,
           switzerland_time: swissTime,

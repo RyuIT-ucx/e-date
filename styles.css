@@ -55,6 +55,7 @@ h1 em,h2 em{color:var(--pink-dark);font-weight:600}
 .seat-label{position:absolute;bottom:52px;z-index:4;color:#995676;font-family:"Playfair Display",serif;font-size:17px;font-style:italic}
 .seat-label--left{left:calc(50% - 108px)}.seat-label--right{left:calc(50% + 38px)}
 .art-heart{position:absolute;z-index:5;left:calc(50% - 19px);bottom:205px;color:#fff;font-size:40px;text-shadow:0 4px 15px #aa6988;animation:float 3s ease-in-out infinite}
+.art-pup{position:absolute;z-index:5;right:16px;bottom:19px;font-size:28px;transform:rotate(8deg)}
 @keyframes float{50%{transform:translateY(-10px)}}
 .art-caption{position:absolute;bottom:20px;left:0;right:0;text-align:center;color:#925875;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;z-index:2}
 .promise-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:33px 25px 20px}
