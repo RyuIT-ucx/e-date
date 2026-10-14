@@ -99,7 +99,7 @@
       const day = document.createElement("strong");
       day.textContent = formatDate(date, bangkok, { hour: "2-digit", minute: "2-digit", hourCycle: "h23" });
       const times = document.createElement("small");
-      times.textContent = `Thailand · ${formatDate(date, zurich, { weekday: "short", hour: "2-digit", minute: "2-digit", hourCycle: "h23" })} Switzerland`;
+      times.textContent = `Switzerland: ${formatDate(date, zurich, { weekday: "short", hour: "2-digit", minute: "2-digit", hourCycle: "h23" })}`;
       copy.append(day, times);
       label.append(input, dot, copy);
       list.append(label);
@@ -224,10 +224,11 @@
   const noButton = $("#no-button");
   const noMessages = ["Are you suuure? 👀", "This button is feeling shy 🙈", "Maybe try the pink one? 💗"];
   let dodges = 0;
-  function dodge() {
+  function dodge(compact = false) {
     dodges += 1;
-    const x = [-42, 50, -20, 38][dodges % 4];
-    const y = [-18, 16, 22, -20][dodges % 4];
+    const scale = compact ? 0.35 : 1;
+    const x = [-42, 50, -20, 38][dodges % 4] * scale;
+    const y = [-18, 16, 22, -20][dodges % 4] * scale;
     noButton.style.transform = `translate(${x}px, ${y}px) rotate(${dodges % 2 ? -5 : 5}deg)`;
     $("#no-message").textContent = noMessages[(dodges - 1) % noMessages.length];
   }
@@ -235,7 +236,7 @@
     if (event.pointerType === "mouse") dodge();
   });
   noButton.addEventListener("click", () => {
-    dodge();
+    dodge(window.matchMedia("(max-width: 620px)").matches);
     $("#no-message").textContent = "No pressure. The invitation is here whenever you want it ♡";
   });
   $(".brand").addEventListener("click", () => showStep("invite"));
