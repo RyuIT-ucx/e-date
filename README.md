@@ -14,25 +14,15 @@ Edit [`config.js`](config.js):
 
 GitHub Pages serves static files and cannot save bookings itself. This project sends the confirmed choice to [FormSubmit](https://formsubmit.co/) using its AJAX endpoint.
 
-1. Submit a test booking to `https://formsubmit.co/ajax/YOUR_EMAIL_ADDRESS` from the published domain. FormSubmit emails a one-time activation link to that address. Activate it; the email also contains a random alias for the address.
-2. Set `bookingEndpoint` in `config.js` to `https://formsubmit.co/ajax/YOUR_RANDOM_ALIAS` and publish the update.
-3. Submit a second test booking and check that the email arrives. Check spam if needed.
+The FormSubmit recipient has been activated and its random alias is configured in `config.js`. Submit a booking on the published page and check that the email arrives. Check spam if needed.
 
 The FormSubmit alias keeps the recipient email out of the public source. A form service still processes the booking details.
 
 Do not send the page link until the test email succeeds.
 
-### Publish with GitHub Pages
+### GitHub Pages
 
-Once this repository is on GitHub, open **Settings → Pages** and choose **Deploy from a branch**, branch `main`, folder `/ (root)`. The address will be `https://YOUR_USERNAME.github.io/REPOSITORY_NAME/`.
-
-To create and push the repository with GitHub CLI after signing in:
-
-```bash
-gh auth login
-cd /home/ave/Projects/nam-tan-e-date
-gh repo create nam-tan-e-date --public --source=. --remote=origin --push
-```
+The repository is published at `https://github.com/RyuIT-ucx/e-date`, and Pages deploys from `main` at `https://ryuit-ucx.github.io/e-date/`.
 
 GitHub Free requires a public repository for Pages. Paid plans also support Pages from a private repository; in that case you can change `--public` to `--private`. **A public repository exposes the page and all source files**, including configured email and movie titles. A published Pages site is publicly accessible even when its source repository is private.
 

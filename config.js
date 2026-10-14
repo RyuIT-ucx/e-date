@@ -1,7 +1,7 @@
 // Owner settings. See README.md before sharing the page.
 window.DATE_CONFIG = {
-  // Add the private FormSubmit alias after activating the recipient address.
-  bookingEndpoint: "",
+  // FormSubmit alias hides the recipient email address in this public file.
+  bookingEndpoint: "https://formsubmit.co/ajax/3b2952a4cab9835bd2322bfadfbc4907",
 
   // Your availability is written in Swiss local time. October 2026 is CEST
   // (+02:00); after the clock change, the open-ended window needs no offset.
