@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fff8fb" />
+    <meta name="description" content="A little invitation for Nam Tan: one movie, two time zones, one date." />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>A little date for Nam Tan ♡</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="config.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="page-glow page-glow--one" aria-hidden="true"></div>
+    <div class="page-glow page-glow--two" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <a class="brand" href="#home" aria-label="Back to the invitation">♡ <span>for Nam Tan</span></a>
+      <span class="topbar-note">a tiny corner of the internet, just for us</span>
+      <span class="topbar-star" aria-hidden="true">✳</span>
+    </header>
+
+    <main id="home" class="shell">
+      <div class="eyebrow"><span class="eyebrow-line"></span> A LONG-DISTANCE LITTLE PLAN <span class="eyebrow-line"></span></div>
+
+      <section id="invite-step" class="step step--active" aria-labelledby="invite-title">
+        <div class="hero-layout">
+          <div class="hero-copy">
+            <span class="pill">💌 a note for you</span>
+            <h1 id="invite-title" tabindex="-1">Nam Tan, <em>will you go on a date with me?</em></h1>
+            <p class="hero-lead">There might be 9,000 km between us, but I think we can still make a night feel like <em>ours</em>.</p>
+            <div class="hero-actions" id="invite-actions">
+              <button id="yes-button" class="button button--primary" type="button">Yes, I’d love to <span aria-hidden="true">↗</span></button>
+              <button id="no-button" class="button button--no" type="button">No 🙈</button>
+            </div>
+            <p id="no-message" class="microcopy" aria-live="polite">Psst… the other button has better plans.</p>
+          </div>
+
+          <div class="hero-art" aria-label="Illustration of two seats under one sky" role="img">
+            <div class="art-stars" aria-hidden="true">✦ &nbsp; ✧ &nbsp; ✦</div>
+            <div class="moon" aria-hidden="true"></div>
+            <div class="art-cloud art-cloud--left" aria-hidden="true"></div>
+            <div class="art-cloud art-cloud--right" aria-hidden="true"></div>
+            <div class="seat seat--left"><div class="seat-back"></div><div class="seat-bottom"></div></div>
+            <div class="seat seat--right"><div class="seat-back"></div><div class="seat-bottom"></div></div>
+            <div class="seat-label seat-label--left">my seat</div>
+            <div class="seat-label seat-label--right">your seat</div>
+            <div class="art-heart" aria-hidden="true">♡</div>
+            <div class="art-caption">same movie, same moment</div>
+          </div>
+        </div>
+
+        <div class="promise-strip" aria-label="The plan">
+          <div><span>01</span><strong>Pick a time</strong><small>Thai time, so it’s easy for you</small></div>
+          <div><span>02</span><strong>Choose our movie</strong><small>Maybe something scary? 👻</small></div>
+          <div><span>03</span><strong>Press play together</strong><small>With a call and snacks, obviously</small></div>
+        </div>
+      </section>
+
+      <section id="date-step" class="step" aria-labelledby="date-title" hidden>
+        <div class="section-top"><span class="step-count">01 / 03</span><span class="section-sparkle">✳</span></div>
+        <div class="section-grid">
+          <div>
+            <span class="pill">🗓️ first, our moment</span>
+            <h2 id="date-title" tabindex="-1">When can I steal <em>a little time</em> with you?</h2>
+            <p class="section-lead">Pick a day, then choose a time in Thailand time (ICT). Every option gives us at least three hours for our movie and a call.</p>
+            <div class="timezone-note"><span>☀️</span><span>Thailand is 5 or 6 hours ahead of Switzerland, depending on the season. The matching Swiss time appears on each card.</span></div>
+          </div>
+          <div class="selection-panel">
+            <div class="panel-heading"><span>AVAILABLE MOMENTS</span><span class="panel-heart">♡</span></div>
+            <label class="input-label date-label" for="date-picker">Pick a day in Thailand</label>
+            <input id="date-picker" class="text-input date-picker" type="date" aria-describedby="date-help" />
+            <p id="date-help" class="date-help">The times below match the day you choose.</p>
+            <div id="slot-list" class="slot-list" role="radiogroup" aria-label="Available date and time"></div>
+            <p id="slot-error" class="field-error" aria-live="polite"></p>
+            <div class="panel-footer"><button class="text-button" type="button" data-back="invite">← Back</button><button id="date-next" class="button button--primary" type="button">Next: movie night <span aria-hidden="true">→</span></button></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="movie-step" class="step" aria-labelledby="movie-title" hidden>
+        <div class="section-top"><span class="step-count">02 / 03</span><span class="section-sparkle">✳</span></div>
+        <div class="section-grid">
+          <div>
+            <span class="pill">🍿 the best part</span>
+            <h2 id="movie-title" tabindex="-1">Our very own <em>movie date</em></h2>
+            <p class="section-lead">We’ll call each other, get our favorite snacks, and press play at the same time. I may be 9,000 km away, but I’ll still be right there for every jump scare.</p>
+            <div class="quote-card"><span class="quote-mark">“</span><p>my seat&nbsp;&nbsp; ♡ &nbsp;&nbsp;your seat</p><small>the cinema seating plan I wish we had</small></div>
+          </div>
+          <div class="selection-panel">
+            <div class="panel-heading"><span>WHAT SHOULD WE WATCH?</span><span class="panel-heart">✦</span></div>
+            <div id="movie-list" class="movie-list" role="radiogroup" aria-label="Movie choice"></div>
+            <p id="movie-error" class="field-error" aria-live="polite"></p>
+            <div class="panel-footer"><button class="text-button" type="button" data-back="date">← Back</button><button id="movie-next" class="button button--primary" type="button">One last thing <span aria-hidden="true">→</span></button></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="confirm-step" class="step" aria-labelledby="confirm-title" hidden>
+        <div class="section-top"><span class="step-count">03 / 03</span><span class="section-sparkle">✳</span></div>
+        <div class="section-grid">
+          <div>
+            <span class="pill">💗 almost a date</span>
+            <h2 id="confirm-title" tabindex="-1">This sounds like <em>a pretty good night.</em></h2>
+            <p class="section-lead">Leave me a little note if you want. Once you confirm, I’ll get your choice and we can sort out the call and the movie link together.</p>
+            <div class="tiny-detail">P.S. Bring a blanket. Horror movies demand one. 👻</div>
+          </div>
+          <div class="selection-panel">
+            <div class="panel-heading"><span>OUR DATE PLAN</span><span class="panel-heart">♡</span></div>
+            <div id="summary" class="summary"></div>
+            <label class="input-label" for="guest-name">Your name <span>(so I know it’s you)</span></label>
+            <input id="guest-name" class="text-input" type="text" name="name" value="Nam Tan" maxlength="80" required autocomplete="name" />
+            <label class="input-label" for="guest-note">A little note <span>(optional)</span></label>
+            <textarea id="guest-note" class="text-input" rows="3" maxlength="500" placeholder="I’ll bring the popcorn…"></textarea>
+            <p id="submit-error" class="field-error" aria-live="polite"></p>
+            <div class="panel-footer"><button class="text-button" type="button" data-back="movie">← Back</button><button id="confirm-button" class="button button--primary" type="button">Confirm our date <span aria-hidden="true">♡</span></button></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="done-step" class="step done-step" aria-labelledby="done-title" hidden>
+        <div class="done-icon">♡</div>
+        <span class="pill">it’s a date!</span>
+        <h2 id="done-title" tabindex="-1">I can’t wait, <em>Nam Tan.</em></h2>
+        <p>Your choice has been sent. I’ll message you with the call and movie details. Until then: save me the seat next to you, even if it’s virtual. 🍿💗</p>
+        <div id="done-summary" class="done-summary"></div>
+      </section>
+    </main>
+
+    <footer class="footer"><span>made with a lot of thought, for Nam Tan ♡</span><span>Switzerland ↗ Thailand</span></footer>
+  </body>
+</html>
