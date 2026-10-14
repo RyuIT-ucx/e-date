@@ -7,7 +7,7 @@ A static, English invitation page made for GitHub Pages. It has a playful invita
 Edit [`config.js`](config.js):
 
 1. Review `availability`. It currently reflects the supplied Swiss time windows: 16 October 16:00 through 18 October 00:00, 19 October 12:00 through 20 October 00:00, then from 22 October 12:00 onward. Dates can be selected through 14 January 2027. Only start times that leave three hours inside an available window appear. Times are offered every 30 minutes and displayed in Thailand time with the matching Swiss time.
-2. Replace the example `movies` with the actual film choices once you decide them. Each `id` should be unique.
+2. Replace the example `movies` with the actual film choices once you decide them. Each `id` should be unique. Nam Tan can also type her own movie suggestion on the page.
 3. Activate and test FormSubmit email delivery (below).
 
 ### Receive her choices by email

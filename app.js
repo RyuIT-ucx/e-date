@@ -137,11 +137,62 @@
       label.append(input, icon, copy, dot);
       list.append(label);
     });
+
+    const custom = document.createElement("div");
+    custom.className = "custom-movie";
+    const label = document.createElement("label");
+    label.className = "choice-card movie-card";
+    label.htmlFor = "custom-movie-radio";
+    const radio = document.createElement("input");
+    radio.id = "custom-movie-radio";
+    radio.type = "radio";
+    radio.name = "movie";
+    radio.value = "custom";
+    radio.checked = state.movie === "custom";
+    radio.addEventListener("change", () => {
+      state.movie = "custom";
+      $("#movie-error").textContent = "";
+      $("#custom-movie-title").focus();
+    });
+    const icon = document.createElement("span");
+    icon.className = "movie-icon";
+    icon.textContent = "🎬";
+    const copy = document.createElement("span");
+    copy.className = "movie-copy";
+    const title = document.createElement("strong");
+    title.textContent = "Suggest your own movie";
+    const description = document.createElement("small");
+    description.textContent = "Pick any movie. I’ll sort out where we can watch it together.";
+    copy.append(title, description);
+    const dot = document.createElement("span");
+    dot.className = "choice-dot";
+    dot.setAttribute("aria-hidden", "true");
+    label.append(radio, icon, copy, dot);
+    const movieInput = document.createElement("input");
+    movieInput.id = "custom-movie-title";
+    movieInput.className = "text-input custom-movie-input";
+    movieInput.type = "text";
+    movieInput.maxLength = 120;
+    movieInput.placeholder = "Movie title…";
+    movieInput.setAttribute("aria-label", "Your movie suggestion");
+    movieInput.addEventListener("focus", () => {
+      radio.checked = true;
+      state.movie = "custom";
+    });
+    movieInput.addEventListener("input", () => {
+      radio.checked = true;
+      state.movie = "custom";
+      $("#movie-error").textContent = "";
+    });
+    custom.append(label, movieInput);
+    list.append(custom);
   }
 
   function selectionDetails() {
     const date = new Date(state.slot);
-    const movie = (config.movies || []).find((item) => item.id === state.movie);
+    const movie = state.movie === "custom"
+      ? { title: $("#custom-movie-title").value.trim() }
+      : (config.movies || []).find((item) => item.id === state.movie);
     return {
       date,
       movie,
@@ -202,6 +253,11 @@
   $("#movie-next").addEventListener("click", () => {
     if (!state.movie) {
       $("#movie-error").textContent = "Choose our movie plan first ♡";
+      return;
+    }
+    if (state.movie === "custom" && !$("#custom-movie-title").value.trim()) {
+      $("#movie-error").textContent = "Tell me which movie you have in mind ♡";
+      $("#custom-movie-title").focus();
       return;
     }
     appendSummary($("#summary"));

@@ -94,6 +94,8 @@ h2{font-size:clamp(43px,4.6vw,64px);line-height:1.13;margin:24px 0}
 .slot-copy small,.movie-copy small{font-size:11px;color:#89909d;line-height:1.5}
 .movie-icon{display:grid;place-items:center;width:42px;height:42px;border-radius:11px;background:#fce7ee;font-size:22px;flex:none}
 .movie-copy{flex:1}
+.custom-movie{display:grid;gap:8px}
+.custom-movie-input{margin:0 2px;width:calc(100% - 4px)}
 .field-error{min-height:17px;margin:10px 0;color:#b9466b;font-size:12px}
 .panel-footer{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-top:18px}
 .text-button{border:0;background:none;padding:10px 0;color:#9b7b8b;font-size:12px;font-weight:700}
